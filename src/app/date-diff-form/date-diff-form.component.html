@@ -1,0 +1,36 @@
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" > <!-- [formGroup]="form" -->
+        <div class="form-group">
+            <label [attr.for]="firstDate">First date</label>
+            <input type="date" formControlName="firstDate" class="form-control"> <!-- [ngModel]="firstDate.value" -->
+            <div *ngIf="firstDate.invalid && (firstDate.dirty || firstDate.touched)" class="alert alert-danger">
+                <div *ngIf="firstDate.errors.required">
+                    Date is required.
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label [attr.for]="secondDate">Second date</label>
+            <input type="date" formControlName="secondDate" class="form-control">
+            <div *ngIf="secondDate.invalid && (secondDate.dirty || secondDate.touched)" class="alert alert-danger">
+                <div *ngIf="secondDate.errors.required">
+                    Date is required.
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+          <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+    <div *ngIf="form.errors?.checkValidityDates && (form.touched || form.dirty)" class="alert alert-danger">
+        The second date muste be superior to the first date.
+    </div>
+
+    <div *ngIf="form.valid && submited" class="alert alert-success">
+        Result : {{ dateDiffInDays }}
+    </div>
+</div>
+
+<!-- <div><span>Result: </span>{{result}}</div> -->
+
